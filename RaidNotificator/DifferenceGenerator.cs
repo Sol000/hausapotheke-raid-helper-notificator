@@ -1,5 +1,6 @@
 ﻿using Discord.WebSocket;
 using Microsoft.Extensions.FileSystemGlobbing.Internal;
+using RaidNotificator.DTOs;
 
 namespace RaidNotificator;
 

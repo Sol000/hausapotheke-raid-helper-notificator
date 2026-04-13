@@ -2,10 +2,11 @@
 using System.Text.Json.Serialization;
 using System.Collections.Generic;
 
+namespace RaidNotificator.DTOs;
+
 public class RaidEvent
 {
     // Das Hauptobjekt, das du von der API erhältst
-
     [JsonPropertyName("title")]
     public string Title { get; set; }
     

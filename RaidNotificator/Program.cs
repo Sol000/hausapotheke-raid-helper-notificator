@@ -2,6 +2,7 @@
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
+using RaidNotificator.Infrastructure;
 
 namespace RaidNotificator
 {
@@ -14,8 +15,9 @@ namespace RaidNotificator
         {
             var configuration = new ConfigurationBuilder()
                 .AddUserSecrets(Assembly.GetExecutingAssembly())
+                .AddEnvironmentVariables()
                 .Build();
-
+            
             var serviceProvider = new ServiceCollection()
                 .AddLogging(options =>
                 {
@@ -23,7 +25,8 @@ namespace RaidNotificator
                     options.AddConsole();
                 })
                 .AddSingleton<IConfiguration>(configuration)
-                .AddScoped<IBot, Bot>()
+                .AddSingleton<IMongoClientBot, MongoDbClient>()
+                .AddSingleton<IBot, Bot>()
                 .BuildServiceProvider();
 
             try

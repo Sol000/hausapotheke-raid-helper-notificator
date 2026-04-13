@@ -1,5 +1,6 @@
 ﻿using Discord;
 using Discord.WebSocket;
+using RaidNotificator.DTOs;
 
 namespace RaidNotificator.Components;
 
