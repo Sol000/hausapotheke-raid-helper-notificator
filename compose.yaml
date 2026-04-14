@@ -1,6 +1,6 @@
-﻿services:
+services:
   mongo:
-    image: mongo:7.0
+    image: mongo:7-bookworm
     container_name: raidnotificator-mongo
     restart: unless-stopped
     ports:
@@ -14,8 +14,8 @@
       interval: 10s
       timeout: 5s
       retries: 5
-      
-   bot:
+
+  bot:
     build:
       context: .
       dockerfile: RaidNotificator/Dockerfile
@@ -33,6 +33,7 @@
       DOTNET_EnableDiagnostics: "0"
     networks:
       - raidnet
+
 volumes:
   mongo_data:
     driver: local
