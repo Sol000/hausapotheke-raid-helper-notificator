@@ -1,6 +1,6 @@
 ﻿services:
   mongo:
-    image: mongo:7-bookworm
+    image: mongodb/mongodb-community-server:4.4-ubuntu2204-slim
     container_name: raidnotificator-mongo
     restart: unless-stopped
     ports:
