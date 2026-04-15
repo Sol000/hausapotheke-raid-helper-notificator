@@ -4,6 +4,7 @@ public enum DiffType
 {
     SignedOut,
     SignedIn,
+    Abcence,
     Late
 }
 

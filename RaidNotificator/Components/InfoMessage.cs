@@ -37,6 +37,11 @@ public static class InfoMessage
                 container.WithTextDisplay("### Kommt später")
                     .WithTextDisplay($"**{diff.Username}** hat sich von `{(IsMimimiClass(diff.OldClass) ? string.Empty : $"{diff.Role} {diff.Spec} ")}{diff.OldClass}` zu `{diff.Class}` umgemeldet.");
                 break;
+            case DiffType.Abcence:
+                container.AccentColor = Color.Red;
+                container.WithTextDisplay("### Abwesenheit")
+                    .WithTextDisplay($"**{diff.Username}** hat is `{diff.Class}` gemeldet.");
+                break;
             default:
                 break;
         }
