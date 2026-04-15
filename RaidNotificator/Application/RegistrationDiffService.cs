@@ -12,17 +12,33 @@ public sealed class RegistrationDiffService : IRegistrationDiffService
 
         if (idsAfter.Count != idsBefore.Count)
         {
+            
             var newId = idsAfter.FirstOrDefault(id => !idsBefore.Contains(id));
             if (!string.IsNullOrWhiteSpace(newId))
             {
                 var signUp = after.SignUps.First(s => s.UserId == newId);
+                if (signUp.ClassName.Contains("Bench") ||
+                    signUp.ClassName.Contains("Tentative") ||
+                    signUp.ClassName.Contains("Absence"))
+                {
+                    return new RegistrationDiff
+                    {
+                        Type = DiffType.Abcence,
+                        Username = signUp.Name,
+                        OldClass = string.Empty,
+                        Class = signUp.ClassName,
+                        Spec = signUp.SpecName ?? string.Empty,
+                        Role = signUp.RoleName,
+                        Number = signUp.Position,
+                    };
+                }
                 return new RegistrationDiff
                 {
                     Type = DiffType.SignedIn,
                     Username = signUp.Name,
                     OldClass = string.Empty,
                     Class = signUp.ClassName,
-                    Spec = signUp.SpecName,
+                    Spec = signUp.SpecName ?? string.Empty,
                     Role = signUp.RoleName,
                     Number = signUp.Position,
                 };
@@ -64,7 +80,7 @@ public sealed class RegistrationDiffService : IRegistrationDiffService
             OldClass = before.ClassName,
             Class = after.ClassName,
             Role = after.RoleName,
-            Spec = after.SpecName,
+            Spec = after.SpecName ?? string.Empty,
             Number = after.Position
         };
     }
